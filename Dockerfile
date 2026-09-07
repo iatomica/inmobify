@@ -8,8 +8,8 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Install dependencies with cache optimization
-COPY package.json package-lock.json ./
-RUN npm ci --prefer-offline --no-audit
+COPY package.json ./
+RUN npm install --no-package-lock
 
 # Copy application source files
 COPY . .
