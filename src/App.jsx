@@ -1,122 +1,204 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { Header } from './components/layout/Header';
+import { Hero } from './components/home/Hero';
+import { PropertyCatalog } from './components/catalog/PropertyCatalog';
+import { PropertyDetailModal } from './components/catalog/PropertyDetailModal';
+import { AndeanZones } from './components/home/AndeanZones';
+import { ConsultingSection } from './components/home/ConsultingSection';
+import { Footer } from './components/layout/Footer';
+import { LoginRoleModal } from './components/auth/LoginRoleModal';
+import { AdminDashboard } from './components/dashboard/AdminDashboard';
+import { AgentDashboard } from './components/dashboard/AgentDashboard';
+import { BuyerDashboard } from './components/dashboard/BuyerDashboard';
+import { TenantDashboard } from './components/dashboard/TenantDashboard';
+import { PROPERTIES_DATA } from './data/propertiesData';
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  // Global Properties State (Editable in real-time by Admin / Agent)
+  const [properties, setProperties] = useState(PROPERTIES_DATA);
+
+  // Global Favorites State
+  const [favorites, setFavorites] = useState(['residencia-nahuel-huapi', 'cabana-nordica-san-martin']);
+
+  // Currency State (USD / ARS)
+  const [currency, setCurrency] = useState('USD');
+
+  // Active User Profile / Role State
+  const [currentUser, setCurrentUser] = useState({
+    id: 'admin',
+    name: 'Roberto Valenzuela',
+    email: 'admin@inmobify.com',
+    role: 'admin',
+    title: 'Admin Master / Director General'
+  });
+
+  // Modal Visibility States
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isAdminDashboardOpen, setIsAdminDashboardOpen] = useState(false);
+  const [isAgentDashboardOpen, setIsAgentDashboardOpen] = useState(false);
+  const [isBuyerDashboardOpen, setIsBuyerDashboardOpen] = useState(false);
+  const [isTenantDashboardOpen, setIsTenantDashboardOpen] = useState(false);
+  const [selectedPropertyDetail, setSelectedPropertyDetail] = useState(null);
+
+  // Hero Search Filter State passed to catalog
+  const [heroFilters, setHeroFilters] = useState(null);
+
+  const handleToggleFavorite = (id) => {
+    setFavorites(prev => 
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
+  };
+
+  const handleToggleCurrency = () => {
+    setCurrency(prev => prev === 'USD' ? 'ARS' : 'USD');
+  };
+
+  const handleOpenDashboardForRole = () => {
+    switch (currentUser.role) {
+      case 'admin':
+        setIsAdminDashboardOpen(true);
+        break;
+      case 'agent':
+        setIsAgentDashboardOpen(true);
+        break;
+      case 'tenant':
+        setIsTenantDashboardOpen(true);
+        break;
+      default:
+        setIsBuyerDashboardOpen(true);
+        break;
+    }
+  };
+
+  const handleAddProperty = (newProp) => {
+    setProperties(prev => [newProp, ...prev]);
+  };
+
+  const handleUpdatePrice = (id, newPriceUSD) => {
+    setProperties(prev => prev.map(p => {
+      if (p.id === id) {
+        return {
+          ...p,
+          priceUSD: newPriceUSD,
+          priceARS: newPriceUSD * 1250
+        };
+      }
+      return p;
+    }));
+  };
+
+  const handleDeleteProperty = (id) => {
+    setProperties(prev => prev.filter(p => p.id !== id));
+  };
+
+  const handleSelectZone = (zoneName) => {
+    setHeroFilters({ location: zoneName });
+    const catalogEl = document.getElementById('catalogo');
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen bg-[#0f172a] text-[#f8fafc] font-sans">
+      
+      {/* Navigation Header */}
+      <Header
+        currentUser={currentUser}
+        onOpenLoginModal={() => setIsLoginModalOpen(true)}
+        onOpenDashboard={handleOpenDashboardForRole}
+        favoritesCount={favorites.length}
+        onOpenFavorites={() => setIsBuyerDashboardOpen(true)}
+        currency={currency}
+        onToggleCurrency={handleToggleCurrency}
+      />
 
-      <div className="ticks"></div>
+      {/* Hero Section with Advanced Search */}
+      <Hero onFilterChange={(filters) => setHeroFilters(filters)} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* Main Property Catalog */}
+      <PropertyCatalog
+        properties={properties}
+        currency={currency}
+        favorites={favorites}
+        onToggleFavorite={handleToggleFavorite}
+        onOpenDetails={(prop) => setSelectedPropertyDetail(prop)}
+        onScheduleVisit={(prop) => setSelectedPropertyDetail(prop)}
+        activeFilters={heroFilters}
+        onFilterChange={setHeroFilters}
+      />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* Andean Strategic Micro-Zones */}
+      <AndeanZones onSelectZone={handleSelectZone} />
+
+      {/* Architectural & Valuation Consulting */}
+      <ConsultingSection />
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Property Detail Modal */}
+      {selectedPropertyDetail && (
+        <PropertyDetailModal
+          property={selectedPropertyDetail}
+          onClose={() => setSelectedPropertyDetail(null)}
+          currency={currency}
+          isFavorite={favorites.includes(selectedPropertyDetail.id)}
+          onToggleFavorite={handleToggleFavorite}
+        />
+      )}
+
+      {/* Role Switcher Login Modal */}
+      <LoginRoleModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        currentUser={currentUser}
+        onSelectRole={(roleObj) => {
+          setCurrentUser(roleObj);
+          if (roleObj.role === 'admin') setIsAdminDashboardOpen(true);
+          else if (roleObj.role === 'agent') setIsAgentDashboardOpen(true);
+          else if (roleObj.role === 'tenant') setIsTenantDashboardOpen(true);
+          else setIsBuyerDashboardOpen(true);
+        }}
+      />
+
+      {/* Role 1: Admin Master Dashboard */}
+      <AdminDashboard
+        isOpen={isAdminDashboardOpen}
+        onClose={() => setIsAdminDashboardOpen(false)}
+        properties={properties}
+        onAddProperty={handleAddProperty}
+        onUpdatePrice={handleUpdatePrice}
+        onDeleteProperty={handleDeleteProperty}
+        currency={currency}
+      />
+
+      {/* Role 2: Asesor Inmobiliario Dashboard */}
+      <AgentDashboard
+        isOpen={isAgentDashboardOpen}
+        onClose={() => setIsAgentDashboardOpen(false)}
+        properties={properties}
+      />
+
+      {/* Role 3: Cliente Comprador / Inversor Dashboard */}
+      <BuyerDashboard
+        isOpen={isBuyerDashboardOpen}
+        onClose={() => setIsBuyerDashboardOpen(false)}
+        properties={properties}
+        favorites={favorites}
+        onToggleFavorite={handleToggleFavorite}
+        onOpenDetails={(prop) => setSelectedPropertyDetail(prop)}
+        currency={currency}
+      />
+
+      {/* Role 4: Cliente Alquileres / Inquilino Dashboard */}
+      <TenantDashboard
+        isOpen={isTenantDashboardOpen}
+        onClose={() => setIsTenantDashboardOpen(false)}
+      />
+
+    </div>
+  );
 }
 
-export default App
+export default App;
