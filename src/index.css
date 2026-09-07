@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Andean Alpine Modern Luxury Palette */
+    --color-slate-dark: #0f172a;
+    --color-slate-card: #1e293b;
+    --color-slate-border: #334155;
+    
+    --color-copper: #c26d38;
+    --color-copper-light: #e08b52;
+    --color-copper-dark: #9e4f21;
+    
+    --color-forest: #2d4a3e;
+    --color-forest-light: #3d6354;
+    --color-forest-deep: #16261f;
+    
+    --color-lenga: #b47b48;
+    --color-lenga-light: #d49d6a;
+
+    --color-snow: #f8fafc;
+    --color-snow-muted: #94a3b8;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-slate-dark);
+    color: var(--color-snow);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Glassmorphism & Micro-Interactions */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-panel-copper {
+  background: linear-gradient(135deg, rgba(194, 109, 56, 0.15) 0%, rgba(30, 41, 59, 0.8) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(194, 109, 56, 0.3);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c26d38;
+}
