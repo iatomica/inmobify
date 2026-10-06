@@ -2,33 +2,28 @@
 
 @layer base {
   :root {
-    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-heading: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-    /* Andean Alpine Modern Luxury Palette */
-    --color-slate-dark: #0f172a;
-    --color-slate-card: #1e293b;
-    --color-slate-border: #334155;
+    /* Wave Real Estate Premium Palette: White, Deep Navy, Ocean Blue, Refined Slate Greys */
+    --color-wave-navy: #0A192F;
+    --color-wave-deep: #0D2137;
+    --color-wave-blue: #1A56DB;
+    --color-wave-cyan: #0EA5E9;
+    --color-wave-accent: #2563EB;
     
-    --color-copper: #c26d38;
-    --color-copper-light: #e08b52;
-    --color-copper-dark: #9e4f21;
+    --color-surface-card: #FFFFFF;
+    --color-surface-soft: #F8FAFC;
+    --color-surface-border: #E2E8F0;
     
-    --color-forest: #2d4a3e;
-    --color-forest-light: #3d6354;
-    --color-forest-deep: #16261f;
-    
-    --color-lenga: #b47b48;
-    --color-lenga-light: #d49d6a;
-
-    --color-snow: #f8fafc;
-    --color-snow-muted: #94a3b8;
+    --color-text-main: #0F172A;
+    --color-text-muted: #64748B;
   }
 
   body {
     font-family: var(--font-body);
-    background-color: var(--color-slate-dark);
-    color: var(--color-snow);
+    background-color: #F8FAFC;
+    color: var(--color-text-main);
     overflow-x: hidden;
   }
 
@@ -37,42 +32,49 @@
   }
 }
 
-/* Glassmorphism & Micro-Interactions */
-.glass-panel {
-  background: rgba(30, 41, 59, 0.7);
+/* Subtle architectural borders & clean shadows */
+.wave-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wave-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.1);
+  border-color: #CBD5E1;
+}
+
+.wave-glass {
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
-.glass-panel-light {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.wave-glass-dark {
+  background: rgba(10, 25, 47, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-panel-copper {
-  background: linear-gradient(135deg, rgba(194, 109, 56, 0.15) 0%, rgba(30, 41, 59, 0.8) 100%);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(194, 109, 56, 0.3);
 }
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+  background: #CBD5E1;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c26d38;
+  background: #94A3B8;
 }
