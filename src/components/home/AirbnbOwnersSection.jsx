@@ -123,9 +123,13 @@ export const AirbnbOwnersSection = ({ onOpenLeadForm, onAddLead }) => {
             
             {/* Left: Interactive Controls */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 text-xs font-bold text-sky-700 uppercase tracking-widest">
-                <Building2 className="w-4 h-4 text-sky-600" />
-                <span>Asesoramiento y Plan de Gestión para Propietarios</span>
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-xs">
+                <img 
+                  src="/logo-valmay-icon.png" 
+                  alt="Valmay Group Logo" 
+                  className="w-5 h-5 rounded-full object-contain" 
+                />
+                <span className="text-xs font-bold text-slate-900 uppercase tracking-widest">Asesoramiento y Plan de Gestión para Propietarios</span>
               </div>
 
               <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -210,9 +214,16 @@ export const AirbnbOwnersSection = ({ onOpenLeadForm, onAddLead }) => {
             {/* Right: Direct Study Request Card */}
             <div className="lg:col-span-5 bg-white border-2 border-sky-500 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
               <div className="space-y-4">
-                <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-[11px] font-extrabold uppercase tracking-wider inline-block">
-                  Evaluación y Diagnóstico Sin Costo
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-[11px] font-extrabold uppercase tracking-wider inline-block">
+                    Evaluación y Diagnóstico Sin Costo
+                  </span>
+                  <img 
+                    src="/logo-valmay-icon.png" 
+                    alt="Valmay Group" 
+                    className="w-8 h-8 rounded-full shadow-sm object-contain" 
+                  />
+                </div>
 
                 <div>
                   <h4 className="font-heading text-xl font-black text-slate-900 tracking-tight">

@@ -6,7 +6,7 @@ export const INITIAL_HERO_CONFIG = {
   ctaSecondary: "Explorar Servicios de Gestión",
   backgroundImage: "/assets/images/hero_valmay.jpg",
   stats: [
-    { value: "99%", label: "Satisfacción Clientes", detail: "Garantía de calidad Valmay" },
+    { value: "100%", label: "Satisfacción Clientes", detail: "Garantía de calidad Valmay" },
     { value: "+450", label: "Espacios Gestionados", detail: "Departamentos, oficinas y consorcios" },
     { value: "24/7", label: "Atención Urgencias", detail: "Respuesta rápida en CABA" },
     { value: "15+", label: "Años de Experiencia", detail: "Equipo técnico especializado" }
@@ -405,10 +405,10 @@ export const INITIAL_AIRBNB_PROPERTIES = [
 ];
 
 export const STORAGE_KEYS = {
-  HERO: "valmay_hero_config_v4_ba",
-  SERVICES: "valmay_services_data_v4_ba",
-  ZONES: "valmay_coverage_zones_v4_ba",
-  COMPANY: "valmay_company_config_v4_ba",
-  LEADS: "valmay_leads_data_v4_ba",
-  PROPERTIES: "valmay_airbnb_properties_v4_ba"
+  HERO: "valmay_hero_config_v5_ba",
+  SERVICES: "valmay_services_data_v5_ba",
+  ZONES: "valmay_coverage_zones_v5_ba",
+  COMPANY: "valmay_company_config_v5_ba",
+  LEADS: "valmay_leads_data_v5_ba",
+  PROPERTIES: "valmay_airbnb_properties_v5_ba"
 };
