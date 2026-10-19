@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Valmay Group Luminous Light Corporate Palette */
+    --color-slate-dark: #f8fafc;
+    --color-slate-card: #ffffff;
+    --color-slate-border: #e2e8f0;
+    
+    --color-primary: #0284c7;
+    --color-primary-light: #38bdf8;
+    --color-primary-dark: #0369a1;
+    
+    --color-accent: #0ea5e9;
+    --color-accent-gold: #f59e0b;
+
+    --color-snow: #0f172a;
+    --color-snow-muted: #64748b;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-slate-dark);
+    color: var(--color-snow);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Glassmorphism & Micro-Interactions */
+.glass-panel {
+  background: rgba(19, 30, 58, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-panel-blue {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15) 0%, rgba(15, 23, 42, 0.85) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(2, 132, 199, 0.3);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c26d38;
+}
