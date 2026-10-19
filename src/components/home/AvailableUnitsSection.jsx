@@ -131,11 +131,6 @@ export const AvailableUnitsSection = ({ properties = [], onSelectProperty }) => 
                     </span>
                   </div>
 
-                  {/* Owner yield highlight */}
-                  <div className="mt-3 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between text-xs">
-                    <span className="text-emerald-800 font-semibold">Rendimiento Propietario:</span>
-                    <span className="font-bold text-emerald-900">~USD {property.monthlyYieldEstimate}/mes</span>
-                  </div>
                 </div>
 
                 {/* Card Button */}

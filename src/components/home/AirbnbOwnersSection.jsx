@@ -24,31 +24,6 @@ export const AirbnbOwnersSection = ({ onOpenLeadForm, onAddLead }) => {
   const [ownerPhone, setOwnerPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  // Revenue estimation calculation based on Buenos Aires Airbnb market rates
-  const yieldEstimation = useMemo(() => {
-    let baseNight = 95;
-    if (selectedZone.includes('Palermo')) baseNight = 120;
-    else if (selectedZone.includes('Recoleta')) baseNight = 135;
-    else if (selectedZone.includes('Puerto Madero')) baseNight = 160;
-    else if (selectedZone.includes('Retiro')) baseNight = 110;
-    else baseNight = 115; // Belgrano
-
-    const roomMultiplier = selectedRooms === 1 ? 0.85 : selectedRooms === 2 ? 1.15 : 1.55;
-    const nightRate = Math.round(baseNight * roomMultiplier);
-    const estimatedNightsOccupied = 26; // High occupancy in strategic CABA zones (~86%)
-    const grossIncome = nightRate * estimatedNightsOccupied;
-    const managementFeeRate = 0.18; // 18% all-inclusive management
-    const valmayFee = Math.round(grossIncome * managementFeeRate);
-    const netOwnerDividends = grossIncome - valmayFee;
-
-    return {
-      nightRate,
-      grossIncome,
-      valmayFee,
-      netOwnerDividends
-    };
-  }, [selectedZone, selectedRooms]);
-
   const handleSubmitOwnerStudy = (e) => {
     e.preventDefault();
     if (!ownerName || !ownerPhone) return;
@@ -59,12 +34,12 @@ export const AirbnbOwnersSection = ({ onOpenLeadForm, onAddLead }) => {
         date: new Date().toLocaleDateString('es-ES') + ' ' + new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }),
         name: ownerName,
         phone: ownerPhone,
-        email: 'Solicitud Estudio Airbnb',
+        email: 'Solicitud Estudio Inmueble',
         service: 'Gestión Integral Airbnb para Propietarios',
         zone: selectedZone,
         status: 'Pendiente',
-        budget: `Estudio ${selectedRooms} hab. Est. dividendos: USD ${yieldEstimation.netOwnerDividends}/mes`,
-        message: `Propietario interesado en gestión Airbnb para vivienda de ${selectedRooms} habitaciones en ${selectedZone}.`
+        budget: `Tipología: ${selectedRooms} hab. en ${selectedZone}`,
+        message: `Propietario interesado en gestión Airbnb y evaluación para vivienda de ${selectedRooms} habitaciones en ${selectedZone}.`
       });
     }
 
@@ -149,16 +124,16 @@ export const AirbnbOwnersSection = ({ onOpenLeadForm, onAddLead }) => {
             {/* Left: Interactive Controls */}
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 text-xs font-bold text-sky-700 uppercase tracking-widest">
-                <Calculator className="w-4 h-4 text-sky-600" />
-                <span>Simulador de Rentabilidad & Dividendos Mensuales</span>
+                <Building2 className="w-4 h-4 text-sky-600" />
+                <span>Asesoramiento y Plan de Gestión para Propietarios</span>
               </div>
 
               <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900">
-                Calcula cuánto dinero puede generar tu vivienda cada mes
+                Solicita una propuesta personalizada para tu propiedad
               </h3>
 
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Selecciona la ubicación de tu inmueble en Buenos Aires y el número de dormitorios para ver una proyección estimada basada en la ocupación real gestionada por Valmay.
+                Selecciona la ubicación de tu inmueble en Buenos Aires y su tipología para que nuestro equipo realice una evaluación real según el estado y características particulares de tu unidad.
               </p>
 
               {/* Selector 1: Location */}
@@ -193,7 +168,7 @@ export const AirbnbOwnersSection = ({ onOpenLeadForm, onAddLead }) => {
                   {[
                     { id: 1, label: '1 Dormitorio / Estudio' },
                     { id: 2, label: '2 Dormitorios' },
-                    { id: 3, label: '3+ Dormitorios / Villa' }
+                    { id: 3, label: '3+ Dormitorios / Piso' }
                   ].map(item => (
                     <button
                       key={item.id}
@@ -232,50 +207,46 @@ export const AirbnbOwnersSection = ({ onOpenLeadForm, onAddLead }) => {
               </div>
             </div>
 
-            {/* Right: Calculated Yield Card & Lead Trigger */}
+            {/* Right: Direct Study Request Card */}
             <div className="lg:col-span-5 bg-white border-2 border-sky-500 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
               <div className="space-y-4">
-                <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold uppercase tracking-wider inline-block">
-                  Proyección Estimada Mensual
+                <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-[11px] font-extrabold uppercase tracking-wider inline-block">
+                  Evaluación y Diagnóstico Sin Costo
                 </span>
 
                 <div>
-                  <span className="text-xs text-slate-500 font-medium block">Dividendo Neto Estimado para el Propietario</span>
-                  <div className="flex items-baseline gap-2 mt-1">
-                    <span className="font-heading text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
-                      USD {yieldEstimation.netOwnerDividends.toLocaleString('es-ES')}
-                    </span>
-                    <span className="text-xs font-bold text-slate-500">/ mes</span>
-                  </div>
-                  <span className="text-[11px] text-emerald-600 font-semibold block mt-1">
-                    Directo a tu cuenta tras gastos de gestión y comisiones
-                  </span>
+                  <h4 className="font-heading text-xl font-black text-slate-900 tracking-tight">
+                    Plan Integral de Gestión Airbnb
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    Evaluamos tu propiedad en <strong>{selectedZone}</strong> con visita técnica y estudio de mercado individualizado.
+                  </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
-                  <div className="flex justify-between">
-                    <span>Precio medio noche estimado:</span>
-                    <strong className="text-slate-900">USD {yieldEstimation.nightRate}/noche</strong>
+                <div className="pt-3 border-t border-slate-100 space-y-2 text-xs text-slate-700">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-sky-600 shrink-0" />
+                    <span>Publicación profesional en Airbnb, Booking y canales clave</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Ingreso bruto estimado:</span>
-                    <strong className="text-slate-900">USD {yieldEstimation.grossIncome.toLocaleString('es-ES')}/mes</strong>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-sky-600 shrink-0" />
+                    <span>Atención de huéspedes, check-in 24/7 y limpieza técnica</span>
                   </div>
-                  <div className="flex justify-between text-slate-500">
-                    <span>Gestión Valmay All-Inclusive (18%):</span>
-                    <span>-USD {yieldEstimation.valmayFee.toLocaleString('es-ES')}</span>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-sky-600 shrink-0" />
+                    <span>Liquidación mensual directa con reporte de ocupación</span>
                   </div>
                 </div>
 
                 {/* Instant Study Form */}
                 <div className="pt-4 border-t border-slate-100">
                   <span className="text-xs font-bold text-slate-900 block mb-2">
-                    ¿Quieres que estudiemos tu caso particular gratis?
+                    Déjanos tus datos para coordinar una evaluación:
                   </span>
 
                   {submitted ? (
                     <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-xl text-center text-xs text-emerald-800 font-bold animate-fade-in">
-                      ¡Estudio solicitado! Te llamaremos en menos de 2 horas con el informe de rentabilidad.
+                      ¡Solicitud recibida! Te contactaremos para coordinar la evaluación de tu propiedad.
                     </div>
                   ) : (
                     <form onSubmit={handleSubmitOwnerStudy} className="space-y-2.5">
@@ -300,7 +271,7 @@ export const AirbnbOwnersSection = ({ onOpenLeadForm, onAddLead }) => {
                         className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 text-white font-heading font-bold text-xs uppercase tracking-wider shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2 cursor-pointer transition-transform hover:scale-102"
                       >
                         <Send className="w-3.5 h-3.5" />
-                        <span>Solicitar Estudio de Rentabilidad Gratis</span>
+                        <span>Solicitar Diagnóstico Sin Costo</span>
                       </button>
 
                       <a

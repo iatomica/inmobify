@@ -405,10 +405,10 @@ export const INITIAL_AIRBNB_PROPERTIES = [
 ];
 
 export const STORAGE_KEYS = {
-  HERO: "valmay_hero_config_v3_ba",
-  SERVICES: "valmay_services_data_v3_ba",
-  ZONES: "valmay_coverage_zones_v3_ba",
-  COMPANY: "valmay_company_config_v3_ba",
-  LEADS: "valmay_leads_data_v3_ba",
-  PROPERTIES: "valmay_airbnb_properties_v3_ba"
+  HERO: "valmay_hero_config_v4_ba",
+  SERVICES: "valmay_services_data_v4_ba",
+  ZONES: "valmay_coverage_zones_v4_ba",
+  COMPANY: "valmay_company_config_v4_ba",
+  LEADS: "valmay_leads_data_v4_ba",
+  PROPERTIES: "valmay_airbnb_properties_v4_ba"
 };

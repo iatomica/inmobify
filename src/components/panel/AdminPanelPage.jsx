@@ -76,7 +76,6 @@ export const AdminPanelPage = ({
     bathrooms: 1,
     guests: 4,
     nightPrice: 120,
-    monthlyYieldEstimate: 2400,
     occupancyRate: 90,
     rating: 4.95,
     reviewsCount: 15,
@@ -203,7 +202,6 @@ export const AdminPanelPage = ({
       bathrooms: Number(newPropertyForm.bathrooms) || 1,
       guests: Number(newPropertyForm.guests) || 2,
       nightPrice: Number(newPropertyForm.nightPrice) || 100,
-      monthlyYieldEstimate: Number(newPropertyForm.monthlyYieldEstimate) || 2000,
       occupancyRate: Number(newPropertyForm.occupancyRate) || 90,
       rating: 4.95,
       reviewsCount: 1,
@@ -643,11 +641,6 @@ export const AdminPanelPage = ({
                             <span className="text-slate-900 font-bold">USD {property.nightPrice}/noche</span>
                           </div>
                         </div>
-                      </div>
-
-                      <div className="mt-3 p-2 rounded-xl bg-white border border-slate-200 flex items-center justify-between text-xs">
-                        <span className="text-slate-500">Rendimiento Propietario:</span>
-                        <span className="font-bold text-emerald-700">~USD {property.monthlyYieldEstimate}/mes</span>
                       </div>
                     </div>
 
@@ -1101,28 +1094,17 @@ export const AdminPanelPage = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Rendimiento Mensual Propietario (USD/mes)</label>
-                  <input
-                    type="number"
-                    value={editingProperty.monthlyYieldEstimate}
-                    onChange={(e) => setEditingProperty({ ...editingProperty, monthlyYieldEstimate: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Estado</label>
-                  <select
-                    value={editingProperty.status}
-                    onChange={(e) => setEditingProperty({ ...editingProperty, status: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900"
-                  >
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Estado</label>
+                <select
+                  value={editingProperty.status}
+                  onChange={(e) => setEditingProperty({ ...editingProperty, status: e.target.value })}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900"
+                >
                     <option value="Disponible">Disponible</option>
                     <option value="Ocupada">Ocupada</option>
                     <option value="Mantenimiento">Mantenimiento</option>
                   </select>
-                </div>
               </div>
 
               <div>
@@ -1238,28 +1220,17 @@ export const AdminPanelPage = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Dividendo Estimado Propietario (USD/mes)</label>
-                  <input
-                    type="number"
-                    value={newPropertyForm.monthlyYieldEstimate}
-                    onChange={(e) => setNewPropertyForm({ ...newPropertyForm, monthlyYieldEstimate: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Estado</label>
-                  <select
-                    value={newPropertyForm.status}
-                    onChange={(e) => setNewPropertyForm({ ...newPropertyForm, status: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900"
-                  >
-                    <option value="Disponible">Disponible</option>
-                    <option value="Ocupada">Ocupada</option>
-                    <option value="Mantenimiento">Mantenimiento</option>
-                  </select>
-                </div>
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Estado</label>
+                <select
+                  value={newPropertyForm.status}
+                  onChange={(e) => setNewPropertyForm({ ...newPropertyForm, status: e.target.value })}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900"
+                >
+                  <option value="Disponible">Disponible</option>
+                  <option value="Ocupada">Ocupada</option>
+                  <option value="Mantenimiento">Mantenimiento</option>
+                </select>
               </div>
 
               <div>
